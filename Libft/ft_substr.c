@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehyjoo <jaehyjoo@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 17:25:18 by jaehyjoo          #+#    #+#             */
-/*   Updated: 2023/03/18 17:25:19 by jaehyjoo         ###   ########.fr       */
+/*   Created: 2023/04/29 17:58:35 by jaehyjoo          #+#    #+#             */
+/*   Updated: 2023/04/29 17:58:36 by jaehyjoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "libc.h"
-
-void	*ft_memmove(void *dest, const void *src, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned char		*dst;
-	unsigned const char	*s;
-	size_t				i;
+	char	*new;
+	size_t	i;
 
-	if (dest == src)
-		return (dest);
 	i = 0;
-	dst = (unsigned char *)dest;
-	s = (unsigned char *)src;
-	if (dst <= s)
+	if (!s)
+		return (NULL);
+	if (strlen(s) <= start)
+		return (ft_strdup(""));
+	new = (char *)malloc(sizeof(char) * (len + 1));
+	if (!new)
+		return (NULL);
+	while (s[start + i] && i < len)
 	{
-		while (i < len)
-		{
-			dst[i] = s[i];
-			i++;
-		}
+		new[i] = s[start + i];
+		i++;
 	}
-	else
-		while (len-- > 0)
-			dst[len] = s[len];
-	return (dst);
+	new[i] = '\0';
+	return (new);
 }

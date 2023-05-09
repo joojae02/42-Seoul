@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaehyjoo <jaehyjoo@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 17:25:18 by jaehyjoo          #+#    #+#             */
-/*   Updated: 2023/03/18 17:25:19 by jaehyjoo         ###   ########.fr       */
+/*   Created: 2023/04/29 14:45:43 by jaehyjoo          #+#    #+#             */
+/*   Updated: 2023/04/29 14:45:44 by jaehyjoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "libc.h"
-
-void	*ft_memmove(void *dest, const void *src, size_t len)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char		*dst;
-	unsigned const char	*s;
-	size_t				i;
+	size_t	i;
 
-	if (dest == src)
-		return (dest);
 	i = 0;
-	dst = (unsigned char *)dest;
-	s = (unsigned char *)src;
-	if (dst <= s)
+	while (i < n)
 	{
-		while (i < len)
-		{
-			dst[i] = s[i];
-			i++;
-		}
+		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+		i++;
 	}
-	else
-		while (len-- > 0)
-			dst[len] = s[len];
-	return (dst);
+	return (0);
 }
