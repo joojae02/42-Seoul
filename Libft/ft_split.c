@@ -55,7 +55,8 @@ char	*word_malloc(const char *s, char c)
 	result[i] = 0;
 	return (result);
 }
-int	ft_free(char **result, int k)
+
+char	**ft_free(char **result, int k)
 {
 	while (k >= 0)
 	{
@@ -65,6 +66,7 @@ int	ft_free(char **result, int k)
 	free(result);
 	return (0);
 }
+
 char	**ft_split(char const *s, char c)
 {
 	int		i;

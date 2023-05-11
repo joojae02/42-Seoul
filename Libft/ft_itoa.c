@@ -12,48 +12,45 @@
 
 #include "libft.h"
 
-int count_digit(int n)
+int	count_len(int nb)
 {
-	int	i;
+	int	len;
 
-	i = 0;
-	if (n == 0)
-		return (1);
-	else if (n < 0)
+	len = 0;
+	if (nb <= 0)
+		len++;
+	while (nb)
 	{
-		i++;
-		n = -n;
+		len++;
+		nb = nb / 10;
 	}
-	while (n != 0)
-	{
-		n /= 10;
-		i++;
-	}
-	return (i);
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
+	int		len;
 	char	*result;
-	int		num_digit;
+	long	nb;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	num_digit = count_digit(n);
-	result = (char *)malloc(sizeof(char) * (num_digit + 1));
+	len = count_len(n);
+	nb = n;
+	result = malloc(sizeof(char) * (len + 1));
 	if (!result)
-		return (0);
-	result[num_digit--] = '\0'; 
-	if (n < 0)
+		return (NULL);
+	if (nb < 0)
 	{
 		result[0] = '-';
-		n = -n;
+		nb = -nb;
 	}
-	while (n != 0)
+	if (nb == 0)
+		result[0] = '0';
+	result[len] = '\0';
+	while (nb)
 	{
-		result[num_digit] = n%10;
-		n /= 10;
-		num_digit--;
+		result[len - 1] = nb % 10 + '0';
+		len--;
+		nb = nb / 10;
 	}
 	return (result);
 }
