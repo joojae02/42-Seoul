@@ -35,61 +35,61 @@ int	count_char(char const *s, char c)
 	return (count);
 }
 
-void	ft_copy(char const *s, int i, int j, char *into)
+char	*word_malloc(const char *s, char c)
 {
-	int	tmp;
+	int		i;
+	char	*result;
 
-	tmp = 0;
-	while (tmp < j)
+	i = 0;
+	while (s[i] && s[i] != c)
+		i++;
+	result = (char *)malloc(sizeof(char) * (i + 1));
+	if (!result)
+		return (0);
+	i = 0;
+	while (s[i] && s[i] != c)
 	{
-		into[tmp] = s[i + tmp];
-		tmp++;
+		result[i] = s[i];
+		i++;
 	}
-	into[tmp] = '\0';
+	result[i] = 0;
+	return (result);
 }
-void	ft_free(char **result, int k)
+int	ft_free(char **result, int k)
 {
 	while (k >= 0)
 	{
 		free(result[k]);
 		k--;
 	}
+	free(result);
+	return (0);
 }
 char	**ft_split(char const *s, char c)
 {
 	int		i;
 	int		j;
-	int		k;
-	int		size;
 	char	**result;
 
-	size = count_char(s, c);
-	result = (char **)malloc(sizeof(char *) * (size + 1));
+	result = (char **)malloc(sizeof(char *) * (count_char(s, c) + 1));
 	if (!result)
 		return (0);
-	i = -1;
-	k = 0;
-	while (s[++i] != '\0')
+	i = 0;
+	j = 0;
+	while (s[i] != '\0')
 	{
 		while (s[i] == c && s[i] != '\0')
 			i++;
-		j = 0;
-		while (s[i + j] != '\0' && s[i + j] != c)
-			j++;
-		if (j != 0)
+		if (s[i])
 		{
-			result[k] = (char *)malloc(sizeof(char) * (j + 1));
-			if (!result[k])
-			{
-				ft_free(result, k);
-				free(result);
-				return (0);
-			}
-			ft_copy(s, i, j, result[k]);
-			k++;
+			result[j] = word_malloc(s + i, c);
+			if (!result[j])
+				return (ft_free(result, j - 1));
+			j++;
 		}
-		i += j;
+		while (s[i] != c && s[i] != '\0')
+			i++;
 	}
-	result[k] = NULL;
+	result[j] = NULL;
 	return (result);
 }
