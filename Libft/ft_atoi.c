@@ -13,9 +13,9 @@
 
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int			i;
+	long long	sign;
+	long long	result;
 
 	result = 0;
 	i = 0;
@@ -35,5 +35,5 @@ int	ft_atoi(const char *str)
 		result += str[i] - 48;
 		i++;
 	}
-	return (sign * result);
+	return ((int)(sign * result));
 }

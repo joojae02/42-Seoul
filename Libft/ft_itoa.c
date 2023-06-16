@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	count_len(int nb)
+static int	count_len(int nb)
 {
 	int	len;
 

@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int	count_char(char const *s, char c)
+static int	count_char(char const *s, char c)
 {
 	int		i;
 	int		count;
@@ -35,7 +34,7 @@ int	count_char(char const *s, char c)
 	return (count);
 }
 
-char	*word_malloc(const char *s, char c)
+static char	*word_malloc(const char *s, char c)
 {
 	int		i;
 	char	*result;
@@ -56,7 +55,7 @@ char	*word_malloc(const char *s, char c)
 	return (result);
 }
 
-char	**ft_free(char **result, int k)
+static char	**ft_free(char **result, int k)
 {
 	while (k >= 0)
 	{
